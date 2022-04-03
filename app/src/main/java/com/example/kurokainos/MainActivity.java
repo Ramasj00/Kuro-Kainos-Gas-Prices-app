@@ -1,6 +1,9 @@
 package com.example.kurokainos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,10 +24,32 @@ private TextView atnaujinta;
 private Spinner selectCity;
 private String Items;
 private ListView listView;
+private DrawerLayout drawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+            // PRIDEDAM SIDE NAV
+        drawerLayout = findViewById(R.id.drawerLayout);
+        ImageView expanded_menu = (ImageView) drawerLayout.findViewById(R.id.imageMenu);
+
+        expanded_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        findViewById(R.id.drawerLayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
 
 
         //PAIMA DABARTINE DATA
@@ -52,7 +78,7 @@ private ListView listView;
         });
 
 
-        //IDEDAM LSITVIEW
+        //IDEDAM LISTVIEW
         listView=(ListView) findViewById(R.id.listView);
         ArrayList<Degalines>arrayList = new ArrayList<>();
 

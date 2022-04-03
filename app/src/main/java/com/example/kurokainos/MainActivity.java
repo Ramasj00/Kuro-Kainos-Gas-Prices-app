@@ -43,12 +43,7 @@ private DrawerLayout drawerLayout;
             }
         });
 
-        findViewById(R.id.drawerLayout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
+
 
 
 

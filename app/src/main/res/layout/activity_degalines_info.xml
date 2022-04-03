@@ -1,44 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DegalinesInfoActivity">
+    tools:context=".DegalinesInfoActivity"
+    android:background="@color/light_blue">
 
-    <TextView
-        android:id="@+id/degalinesPavadinimas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="miestas"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/very_light_blue"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/degalinesAdresas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="adresas"/>
+        <TextView
+            android:id="@+id/degalinesPavadinimas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="miestas"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/benzinas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="benzinas"/>
+        <TextView
+            android:id="@+id/degalinesAdresas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="adresas"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/dyzelis"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="dyzelis"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="KAINORAŠTIS"
+            android:textColor="@color/very_light_blue"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/dujos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:text="dujos"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="320dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="95"
+                android:textSize="15sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DK"
+                android:textSize="15sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dujos"
+                android:textSize="15sp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/benzinas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="benzinas"
+                android:textSize="15sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/dyzelis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="dyzelis"
+                android:textSize="15sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/dujos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="dujos"
+                android:textColor="@color/white" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="ŽEMĖLAPIS"
+            android:textColor="@color/very_light_blue"
+            android:textSize="24sp" />
+
+        <com.google.android.gms.maps.MapView
+
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
 
 </RelativeLayout>
+

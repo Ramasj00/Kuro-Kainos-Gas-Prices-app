@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginRight="240dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/degalinesPavadinimas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Viada" />
+
+        <TextView
+            android:id="@+id/degalinesAdresas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Justiniškių g. 12" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginRight="180dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="170dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="95" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DK" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dujos" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="230dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/benzinas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3.80 EUR" />
+
+        <TextView
+            android:id="@+id/dyzelis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.50 EUR" />
+
+        <TextView
+            android:id="@+id/dujos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.50 EUR" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

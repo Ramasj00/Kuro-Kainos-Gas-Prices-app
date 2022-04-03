@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DegalinesInfoActivity">
+
+    <TextView
+        android:id="@+id/degalinesPavadinimas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="miestas"/>
+
+    <TextView
+        android:id="@+id/degalinesAdresas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="adresas"/>
+
+    <TextView
+        android:id="@+id/benzinas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="benzinas"/>
+
+    <TextView
+        android:id="@+id/dyzelis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="dyzelis"/>
+
+    <TextView
+        android:id="@+id/dujos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:text="dujos"/>
+
+
+</RelativeLayout>

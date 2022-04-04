@@ -1,6 +1,7 @@
 package com.example.kurokainos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,11 @@ TextView degalinesAdresas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //if(findViewById(R.id.mapView)!=null){
+        Fragment map = new MapsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.mapView,map).commit();//}
+
         setContentView(R.layout.activity_degalines_info);
 
         degalinesPavadinimas = (TextView)findViewById(R.id.degalinesPavadinimas);

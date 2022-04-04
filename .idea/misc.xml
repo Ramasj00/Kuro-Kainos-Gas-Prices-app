@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/activity_degalines_info.xml" value="0.15" />
+        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/activity_degalines_info.xml" value="0.1" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/drawer_header.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/fragment_maps.xml" value="0.2989583333333333" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/listview_row_data.xml" value="0.33" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/menu/drawer_menu.xml" value="0.36666666666666664" />
       </map>

@@ -16,11 +16,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsFragment extends Fragment {
+public class sideNavFragment extends Fragment {
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-        /**
 
+        /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
          * This is where we can add markers or lines, add listeners or move the camera.
@@ -32,11 +32,13 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             //UZDEDAMAS MARKERIS ANT PARASYTOS POZICIJOS
-            LatLng vilnius = new LatLng(54.713430, 25.209110);
-            googleMap.addMarker(new MarkerOptions().position(vilnius).title("Circle K Laisves Pr. 43C"));
+            LatLng vilnius = new LatLng(54.670980, 25.236650);
+            googleMap.addMarker(new MarkerOptions().position(vilnius).title("Circle K Vingis"));
+
+           LatLng vilnius1 = new LatLng(54.661850, 25.235440);
+          googleMap.addMarker(new MarkerOptions().position(vilnius1).title("Circle K Sąvanorių Pr."));
+
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius,15f));
-
-
         }
     };
 
@@ -45,7 +47,7 @@ public class MapsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+        return inflater.inflate(R.layout.fragment_side_nav, container, false);
     }
 
     @Override

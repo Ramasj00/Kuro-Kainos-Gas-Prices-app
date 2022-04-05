@@ -27,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="170dp"
-        android:layout_marginRight="180dp"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -50,7 +49,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="230dp"
+        android:layout_marginLeft="320dp"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -70,7 +69,8 @@
             android:id="@+id/dujos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1.50 EUR" />
+            android:text="1.50 EUR"
+            android:layout_gravity="right"/>
     </LinearLayout>
 
 

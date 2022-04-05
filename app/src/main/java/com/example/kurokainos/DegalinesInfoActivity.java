@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class DegalinesInfoActivity extends AppCompatActivity {
-TextView degalinesPavadinimas;
-TextView degalinesAdresas;
+    TextView degalinesPavadinimas;
+    TextView degalinesAdresas;
     TextView benzinas;
     TextView dyzelis;
     TextView dujos;
@@ -20,16 +20,15 @@ TextView degalinesAdresas;
 
         //if(findViewById(R.id.mapView)!=null){
         Fragment map = new MapsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.mapView,map).commit();//}
+        getSupportFragmentManager().beginTransaction().replace(R.id.mapView, map).commit();//}
 
         setContentView(R.layout.activity_degalines_info);
 
-        degalinesPavadinimas = (TextView)findViewById(R.id.degalinesPavadinimas);
+        degalinesPavadinimas = (TextView) findViewById(R.id.degalinesPavadinimas);
         degalinesAdresas = (TextView) findViewById(R.id.degalinesAdresas);
         benzinas = (TextView) findViewById(R.id.benzinas);
         dyzelis = (TextView) findViewById(R.id.dyzelis);
         dujos = (TextView) findViewById(R.id.dujos);
-
 
 
         Intent intent = getIntent();

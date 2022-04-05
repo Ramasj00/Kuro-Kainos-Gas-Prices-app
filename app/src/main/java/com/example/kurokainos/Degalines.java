@@ -1,18 +1,22 @@
 package com.example.kurokainos;
 
      public  class Degalines{
+         int Id;
+         String Miestas;
         String Pavadinimas;
         String Adresas;
          String BenzinoKaina;
          String DyzelioKaina;
          String DujuKaina;
 
-        public Degalines(String pavadinimas, String adresas, String benzinoKaina, String dyzelioKaina, String dujuKaina){
+        public Degalines(int id,String miestas,String pavadinimas, String adresas, String benzinoKaina, String dyzelioKaina, String dujuKaina){
             Pavadinimas = pavadinimas;
             Adresas = adresas;
             BenzinoKaina = benzinoKaina;
             DyzelioKaina = dyzelioKaina;
             DujuKaina = dujuKaina;
+            Miestas = miestas;
+            Id=id;
         }
 
         public String getPavadinimas(){
@@ -48,5 +52,19 @@ package com.example.kurokainos;
          }
          public void setDujuKaina(String dujuKaina){
              DujuKaina = dujuKaina;
+         }
+
+         public String getMiestas(){
+             return Miestas;
+         }
+         public void setMiestas(String miestas){
+             Miestas = miestas;
+         }
+
+         public int getId(){
+             return Id;
+         }
+         public void setId(int id){
+             Id = id;
          }
 }

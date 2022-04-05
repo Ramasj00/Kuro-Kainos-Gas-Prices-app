@@ -16,6 +16,7 @@ public class DegalinesAdaptor extends ArrayAdapter<Degalines> {
 
 private Context mContext;
 private int mResource;
+
     public DegalinesAdaptor(@NonNull Context context, int resource, @NonNull ArrayList<Degalines> objects) {
         super(context, resource, objects);
         this.mContext = context;

@@ -19,8 +19,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsFragment extends Fragment {
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-
         /**
+
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
          * This is where we can add markers or lines, add listeners or move the camera.
@@ -35,6 +35,8 @@ public class MapsFragment extends Fragment {
             LatLng vilnius = new LatLng(54.687157, 25.279652);
             googleMap.addMarker(new MarkerOptions().position(vilnius).title("Marker in Sydney"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius,17f));
+
+
         }
     };
 

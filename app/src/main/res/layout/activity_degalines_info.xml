@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DegalinesInfoActivity"
-    android:background="@color/light_blue">
+    android:background="@color/light_blue"
+    tools:context=".DegalinesInfoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,22 +56,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="95"
-                android:textSize="15sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DK"
-                android:textSize="15sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dujos"
-                android:textSize="15sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,25 +84,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="benzinas"
-                android:textSize="15sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/dyzelis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="dyzelis"
-                android:textSize="15sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/dujos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
                 android:text="dujos"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="15sp" />
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
         <FrameLayout
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

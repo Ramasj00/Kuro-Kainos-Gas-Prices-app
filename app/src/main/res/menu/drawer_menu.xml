@@ -2,6 +2,10 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Degalinių sąrašas" />
-    <item android:title="Žemėlapis" />
+    <item android:title="Degalinių sąrašas"
+        android:id="@+id/degaliniuSarasasDrawer"
+        android:icon="@drawable/gas_icon"/>
+    <item android:title="Žemėlapis"
+        android:id="@+id/zemelapisDrawer"
+        android:icon="@drawable/map_icon"/>
 </menu>

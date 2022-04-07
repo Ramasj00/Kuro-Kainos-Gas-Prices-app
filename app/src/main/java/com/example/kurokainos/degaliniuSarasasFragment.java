@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,15 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONObject;
 import org.postgresql.util.PSQLException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -46,42 +52,36 @@ public class degaliniuSarasasFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-/*
-        String url = "jdbc:postgresql://10.0.2.2:5432/maxima_db";
-        String password = "1234";
-        String user = "postgres";
-
-
-
-        try {
-
-            Class.forName("org.postgresql.Driver");
-            String sql="SELECT \"id\", \"miestas\", \"pavadinimas\", \"adresas\", \"benzinoKaina\",\"dyzelioKaina\", \"dujuKaina\" FROM degalinesInfo WHERE \"miestas\" = 'Vilnius'";
-
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-
-            Connection myConn = DriverManager.getConnection(url, user, password);
-            Statement myStmt = myConn.createStatement();
-            ResultSet myRs = myStmt.executeQuery(sql);
-            myRs.next();
-
-            System.out.println(myRs.getString("miestas"));
-
-
-            myConn.close();
-
-        } catch (Exception throwables) {
-            throwables.printStackTrace();
-        }
-*/
-
-
+        servakas();
 
     }
 
+    public void servakas(){
+        Runnable runner = new Runnable() {
+            public void run(){
+                try {
+                    Log.wtf("TRY", "Bandoma");
+                    Socket server = new Socket("192.168.0.90", 50300);
+                    Log.wtf("TRY", "prisijungta");
+                    PrintWriter out = new PrintWriter(server.getOutputStream(), true);
+                    BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
+                    out.println("testas");
+                    String jsonResult = in.readLine();
+                    Log.e("atsakymas: ",jsonResult);
+                    JSONObject miestas = new JSONObject(jsonResult);
+                    String title = miestas.getString("miestas");
+                    //String[] miestai=result.split("::");
+                    //for(int i=0;i< miestai.length;i++){
+                    //    Log.e("ats: ",miestai[i]);
+                   // }
+                }catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        Thread t = new Thread(runner);
+        t.start();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,13 +128,11 @@ public class degaliniuSarasasFragment extends Fragment {
         arrayList.add(new Degalines(1, "Vilnius", "test", "123456789g", "1.57", "2.57", "1.38"));
         arrayList.add(new Degalines(3, "Klaipeda", "tsetsts", "Gzzzzzzz", "1.57", "2.57", "1.38"));
 
-
         listView = (ListView) v.findViewById(R.id.listView);
 
         DegalinesAdaptor degalinesAdaptor = new DegalinesAdaptor(getActivity(), R.layout.listview_row_data,arrayList);
 
         listView.setAdapter(degalinesAdaptor);
-
 
         selectCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -147,7 +145,6 @@ public class degaliniuSarasasFragment extends Fragment {
 
             }
         });
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

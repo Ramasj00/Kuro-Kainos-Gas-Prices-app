@@ -33,29 +33,35 @@
 
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/selectCity"
-        android:background="#A5C6E4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:spinnerMode="dropdown"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
-
+        <Spinner
+            android:id="@+id/selectCity"
+            android:background="#A5C6E4"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"/>
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
             />
+
+
+
+
 
     </LinearLayout>
 

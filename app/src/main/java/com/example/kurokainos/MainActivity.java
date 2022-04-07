@@ -7,7 +7,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.imageMenu).setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
 
+
         //side nav mygtuku prrogramavimas
         NavigationView navigationView = findViewById(R.id.navigationView);
 
@@ -33,4 +36,5 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
     }
+
 }

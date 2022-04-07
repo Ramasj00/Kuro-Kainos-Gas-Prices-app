@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PrisijungimasFragment"
+    android:background="@color/light_blue">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KURO KAINOS"
+        android:textSize="60sp"
+        android:layout_gravity="center|top"
+        android:textColor="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+    <EditText
+        android:id="@+id/elPastas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="El. paštas"
+        android:layout_gravity="center"
+        android:textColor="@color/white"/>
+
+        <EditText
+            android:id="@+id/slaptazodis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Slaptažodis"
+            android:layout_gravity="center"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="PRISIJUNGTI"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            />
+    </LinearLayout>
+
+
+
+</FrameLayout>

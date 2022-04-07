@@ -31,12 +31,19 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            //UZDEDAMAS MARKERIS ANT PARASYTOS POZICIJOS
-            LatLng vilnius = new LatLng(54.713430, 25.209110);
-            googleMap.addMarker(new MarkerOptions().position(vilnius).title("Circle K Laisves Pr. 43C"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius,15f));
+
+            double[] array = {54.713430,54.674210,54.543150,54.825486};
 
 
+for(int i =0;i<array.length;i++) {
+
+
+    //UZDEDAMAS MARKERIS ANT PARASYTOS POZICIJOS
+    LatLng vilnius = new LatLng(array[i], 25.209110);
+    googleMap.addMarker(new MarkerOptions().position(vilnius).title("Circle K Laisves Pr. 43C"));
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius, 15f));
+
+}
         }
     };
 

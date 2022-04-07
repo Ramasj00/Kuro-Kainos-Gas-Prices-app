@@ -5,15 +5,21 @@
       <map>
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/drawable/gas_icon.xml" value="0.293" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/drawable/map_icon.xml" value="0.293" />
+        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.16700133868808567" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/activity_degalines_info.xml" value="0.25" />
+        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/activity_login.xml" value="0.2598958333333333" />
+        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/activity_login2.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/drawer_header.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/drawer_header.xml" value="0.2" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/fragment_degaliniu_sarasas.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/fragment_maps.xml" value="0.2989583333333333" />
+        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/fragment_prisijungimas.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/fragment_registracija.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/fragment_side_nav.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/fragment_zemelapis.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/layout/listview_row_data.xml" value="0.33" />
         <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/menu/drawer_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jucev/AndroidStudioProjects/KuroKainos/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.196" />
       </map>
     </option>
   </component>

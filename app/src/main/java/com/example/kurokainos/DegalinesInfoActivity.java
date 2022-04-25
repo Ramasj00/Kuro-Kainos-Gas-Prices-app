@@ -5,14 +5,18 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class DegalinesInfoActivity extends AppCompatActivity {
-    TextView degalinesPavadinimas;
-    TextView degalinesAdresas;
+   public static TextView degalinesPavadinimas;
+    public static TextView degalinesAdresas;
     TextView benzinas;
     TextView dyzelis;
     TextView dujos;
+    Button commentListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,5 +42,24 @@ public class DegalinesInfoActivity extends AppCompatActivity {
         benzinas.setText(intent.getStringExtra("benzinas"));
         dyzelis.setText(intent.getStringExtra("dyzelis"));
         dujos.setText(intent.getStringExtra("dujos"));
+
+
+        commentListButton = (Button)findViewById(R.id.commentListButton);
+        commentListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCommentListActivity();
+            }
+
+            private void openCommentListActivity() {
+                Intent intent = new Intent(getApplicationContext(), CommentListActivity.class);
+                startActivity(intent);
+
+                intent.putExtra("degalinesPavadinimas",degalinesPavadinimas.toString());
+                intent.putExtra("degalinesAdresas",degalinesAdresas.toString());
+            }
+        });
+
+
     }
 }

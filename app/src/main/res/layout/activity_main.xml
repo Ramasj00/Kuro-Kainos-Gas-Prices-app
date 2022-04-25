@@ -22,6 +22,8 @@
         app:defaultNavHost="true"
         android:layout_height="match_parent"/>
 
+
+
    <LinearLayout
        android:id="@+id/layoutToolBar"
        android:paddingStart="15dp"

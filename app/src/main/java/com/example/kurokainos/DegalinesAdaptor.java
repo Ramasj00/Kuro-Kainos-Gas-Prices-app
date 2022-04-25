@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class DegalinesAdaptor extends ArrayAdapter<Degalines> {
 
-private Context mContext;
-private int mResource;
+private final Context mContext;
+private final int mResource;
 
     public DegalinesAdaptor(@NonNull Context context, int resource, @NonNull ArrayList<Degalines> objects) {
         super(context, resource, objects);

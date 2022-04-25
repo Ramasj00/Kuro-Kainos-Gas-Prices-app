@@ -44,71 +44,84 @@
             android:textColor="@color/very_light_blue"
             android:textSize="24sp" />
 
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="60dp"
+            <LinearLayout
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="95"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/benzinas"
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="95"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="DK"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="Dujos"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/benzinas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="benzinas"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/dyzelis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dyzelis"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/dujos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dujos"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="right">
+
+            <Button
+                android:id="@+id/commentListButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="benzinas"
-                android:layout_marginLeft="100dp"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:layout_height="50dp"
+                android:text="KOMENTARAI"
+                android:layout_gravity="center"/>
+</LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:text="DK"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/dyzelis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:text="dyzelis"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:text="Dujos"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-
-
-            <TextView
-                android:id="@+id/dujos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:text="dujos"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
-        </LinearLayout>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

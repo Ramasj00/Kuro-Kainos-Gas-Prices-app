@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".RegistracijaFragment"
     android:background="@color/light_blue">
 
     <TextView
@@ -22,7 +23,7 @@
             android:id="@+id/vartotojoVardas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="El. paštas"
+            android:text="Vartotojo vardas"
             android:layout_gravity="center"
             android:textColor="@color/white"/>
 
@@ -30,7 +31,7 @@
             android:id="@+id/elPastas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Slaptažodis"
+            android:text="El. pastas"
             android:layout_gravity="center"
             android:textColor="@color/white"/>
 
@@ -60,6 +61,17 @@
             android:layout_gravity="center"
             android:layout_marginTop="100dp"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jau turite paskyra?"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/loginButtonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prisijungti"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </FrameLayout>

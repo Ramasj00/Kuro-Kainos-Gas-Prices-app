@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_blue"
+    tools:context=".CommentListActivity">
+
+
+
+    <TextView
+        android:id="@+id/degalinesPavadinimas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Degalines Pavadinimas"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/degalinesAdresas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Degalines adresas"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="KOMENTARAI"
+        android:textColor="#039BE5"
+        android:textSize="28sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Neatitinka kuro kainos? parasyk naujas!"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="95"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="120dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DK"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="100dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dujos"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <EditText
+            android:hint="Iveskite kaina"
+            android:id="@+id/CommentBenzinoKainaEditText"
+            android:background="@color/white"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:inputType="numberDecimal"
+            android:text="1.19"
+            android:layout_marginRight="80dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/CommentDyzelinoKainaEditText"
+            android:background="@color/white"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="1.58"
+            android:inputType="numberDecimal"
+            android:layout_marginRight="80dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/CommentDujuKainaEditText"
+            android:background="@color/white"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="0.75"
+            android:inputType="numberDecimal"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/siustiBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="SIUSTI"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:layout_gravity="center"/>
+
+    <ListView
+        android:layout_marginTop="30dp"
+        android:id="@+id/commentListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

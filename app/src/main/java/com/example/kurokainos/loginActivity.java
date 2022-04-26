@@ -13,7 +13,7 @@ public class loginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Fragment fragment = new Fragment();
+
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment prisijungimasFragment = new PrisijungimasFragment();
         fragmentTransaction.replace(R.id.container,prisijungimasFragment).commit();

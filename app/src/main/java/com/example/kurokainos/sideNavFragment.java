@@ -34,7 +34,7 @@ public class sideNavFragment extends Fragment {
             googleMap.addMarker(new MarkerOptions().position(vilnius1).title("Circle K Sąvanorių Pr."));
 
             LatLng vilnius2 = new LatLng(54.681850, 25.235440);
-            googleMap.addMarker(new MarkerOptions().position(vilnius1).title("Circle K Sąvanorių Pr."));
+            googleMap.addMarker(new MarkerOptions().position(vilnius2).title("Circle K Sąvanorių Pr."));
 
 
 

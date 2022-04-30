@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#7EA3DB"
     android:id="@+id/drawerLayout"
-    tools:context=".MainActivity">
+    tools:context=".mainActivity.MainActivity">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"

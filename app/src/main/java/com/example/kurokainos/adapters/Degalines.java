@@ -1,4 +1,5 @@
-package com.example.kurokainos;
+package com.example.kurokainos.adapters;
+
 
      public  class Degalines{
          int Id;
@@ -8,8 +9,10 @@ package com.example.kurokainos;
          String BenzinoKaina;
          String DyzelioKaina;
          String DujuKaina;
+         double Latitude;
+         double Longtitude;
 
-        public Degalines(int id,String miestas,String pavadinimas, String adresas, String benzinoKaina, String dyzelioKaina, String dujuKaina){
+        public Degalines(int id,String miestas,String pavadinimas, String adresas, String benzinoKaina, String dyzelioKaina, String dujuKaina,double latitude,double longtitude){
             Pavadinimas = pavadinimas;
             Adresas = adresas;
             BenzinoKaina = benzinoKaina;
@@ -17,9 +20,27 @@ package com.example.kurokainos;
             DujuKaina = dujuKaina;
             Miestas = miestas;
             Id=id;
+            Latitude=latitude;
+            Longtitude=longtitude;
         }
 
-        public String getPavadinimas(){
+         public double getLatitude() {
+             return Latitude;
+         }
+
+         public void setLatitude(double latitude) {
+             Latitude = latitude;
+         }
+
+         public double getLongtitude() {
+             return Longtitude;
+         }
+
+         public void setLongtitude(double longtitude) {
+             Longtitude = longtitude;
+         }
+
+         public String getPavadinimas(){
             return Pavadinimas;
         }
         public void setPavadinimas(String pavadinimas){

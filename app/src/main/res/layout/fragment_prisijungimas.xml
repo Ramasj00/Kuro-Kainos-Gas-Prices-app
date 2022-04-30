@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".PrisijungimasFragment"
+    tools:context=".login.PrisijungimasFragment"
     android:background="@color/light_blue">
 
 
@@ -22,22 +21,22 @@
         android:orientation="vertical"
         android:gravity="center">
     <EditText
-        android:id="@+id/elPastas"
+        android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="El. paštas"
+        android:inputType="text"
+        android:hint="Prisijungimo vardas"
         android:layout_gravity="center"
         android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/slaptazodis"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:tooltipText="Slaptažodis"
+            android:inputType="textPassword"
+            android:hint="Slaptazodis"
             android:layout_gravity="center"
             android:textColor="@color/white"/>
-
-
 
         <Button
             android:id="@+id/loginButton"

@@ -1,10 +1,12 @@
-package com.example.kurokainos;
+package com.example.kurokainos.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+
+import com.example.kurokainos.R;
 
 public class loginActivity extends AppCompatActivity {
 

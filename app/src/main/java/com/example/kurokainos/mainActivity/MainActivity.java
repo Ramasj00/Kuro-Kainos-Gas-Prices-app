@@ -1,4 +1,4 @@
-package com.example.kurokainos;
+package com.example.kurokainos.mainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -10,6 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.kurokainos.R;
+import com.example.kurokainos.login.loginActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {

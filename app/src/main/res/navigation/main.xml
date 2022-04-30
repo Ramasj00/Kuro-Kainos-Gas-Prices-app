@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/degaliniuSarasasDrawer"
-        android:name="com.example.kurokainos.degaliniuSarasasFragment"
+        android:name="com.example.kurokainos.mainActivity.degaliniuSarasasFragment"
         android:label="Degaliniu sarasas"
         tools:layout="@layout/fragment_degaliniu_sarasas" />
     <fragment
         android:id="@+id/zemelapisDrawer"
-        android:name="com.example.kurokainos.sideNavFragment"
+        android:name="com.example.kurokainos.mainActivity.sideNavFragment"
         android:label="Zemelapis"
         tools:layout="@layout/fragment_zemelapis" />
 

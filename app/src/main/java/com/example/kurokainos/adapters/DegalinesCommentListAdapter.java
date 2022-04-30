@@ -1,4 +1,4 @@
-package com.example.kurokainos;
+package com.example.kurokainos.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,14 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.kurokainos.R;
+
 import java.util.ArrayList;
 
-public class DegalinesAdaptor extends ArrayAdapter<Degalines> {
+public class DegalinesCommentListAdapter extends ArrayAdapter<DegalinesCommentList> {
 
-private final Context mContext;
-private final int mResource;
+    private final Context mContext;
+    private final int mResource;
 
-    public DegalinesAdaptor(@NonNull Context context, int resource, @NonNull ArrayList<Degalines> objects) {
+    public DegalinesCommentListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<DegalinesCommentList> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
@@ -30,19 +32,20 @@ private final int mResource;
 
         convertView = layoutInflater.inflate(mResource,parent,false);
 
-        TextView degalinesPavadinimas = convertView.findViewById(R.id.degalinesPavadinimas);
 
-        TextView degalinesAdresas = convertView.findViewById(R.id.degalinesAdresas);
 
-        TextView benzinas = convertView.findViewById(R.id.benzinas);
 
-        TextView dyzelis = convertView.findViewById(R.id.dyzelis);
 
-        TextView dujos = convertView.findViewById(R.id.dujos);
+        TextView benzinas = convertView.findViewById(R.id.benzinoKaina);
 
-        degalinesPavadinimas.setText(getItem(position).getPavadinimas());
+        TextView dyzelis = convertView.findViewById(R.id.dyzelinoKaina);
 
-        degalinesAdresas.setText(getItem(position).getAdresas());
+        TextView dujos = convertView.findViewById(R.id.dujuKaina);
+
+        TextView data = convertView.findViewById(R.id.commentData);
+
+
+
 
         benzinas.setText( getItem(position).getBenzinoKaina());
 
@@ -50,9 +53,12 @@ private final int mResource;
 
         dujos.setText( getItem(position).getDujuKaina());
 
+        data.setText( getItem(position).getCommentDate());
+
 
 
 
         return convertView;
     }
+
 }

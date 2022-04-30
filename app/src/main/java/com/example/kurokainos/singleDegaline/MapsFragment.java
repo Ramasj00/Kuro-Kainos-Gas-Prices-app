@@ -1,4 +1,4 @@
-package com.example.kurokainos;
+package com.example.kurokainos.singleDegaline;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.kurokainos.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,33 +18,30 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsFragment extends Fragment {
+private double longt;
+private double lat;
+private String degPavadinimas;
+
+
+   public MapsFragment(double longt, double lat, String degPavadinimas){
+       this.longt=longt;
+       this.lat=lat;
+       this.degPavadinimas=degPavadinimas;
+   }
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-        /**
-
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
         @Override
         public void onMapReady(GoogleMap googleMap) {
 
-            double[] array = {54.713430,54.674210,54.543150,54.825486};
-
-
-for(int i =0;i<array.length;i++) {
-
 
     //UZDEDAMAS MARKERIS ANT PARASYTOS POZICIJOS
-    LatLng vilnius = new LatLng(array[i], 25.209110);
-    googleMap.addMarker(new MarkerOptions().position(vilnius).title("Circle K Laisves Pr. 43C"));
-    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius, 15f));
 
-}
+            if(!String.valueOf(lat).equals(null) && !String.valueOf(longt).equals(null)) {
+                LatLng vilnius = new LatLng(lat, longt);
+                googleMap.addMarker(new MarkerOptions().position(vilnius).title(degPavadinimas));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius, 16f));
+
+            }
         }
     };
 

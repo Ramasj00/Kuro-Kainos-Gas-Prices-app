@@ -1,5 +1,4 @@
-package com.example.kurokainos;
-
+package com.example.kurokainos.mainActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,25 +12,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
+import com.example.kurokainos.adapters.Degalines;
+import com.example.kurokainos.adapters.DegalinesAdaptor;
+import com.example.kurokainos.singleDegaline.DegalinesInfoActivity;
+import com.example.kurokainos.R;
+import com.example.kurokainos.adapters.degalinesSpinner;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -42,11 +40,11 @@ import javax.net.ssl.X509TrustManager;
 
 public class degaliniuSarasasFragment extends Fragment {
     private Spinner selectCity;
-    private String Items;
     private ArrayList<Degalines> productList = new ArrayList<>();
     private ListView listview;
+    private ArrayList<degalinesSpinner> spinnerList = new ArrayList<>();
 
-    private static final String PRODUCT_URL = "https://192.168.0.90/MyApi/Api.php";
+    private static final String degaliniulistapi = "https://192.168.0.90/MyApi/Api.php";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,8 +53,6 @@ public class degaliniuSarasasFragment extends Fragment {
         handleSSLHandshake();
 
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,45 +64,12 @@ public class degaliniuSarasasFragment extends Fragment {
         String strDate = formatter.format(date);
         //UZDEDA DABARTINE DATA TEXTVIEW
         View v = inflater.inflate(R.layout.fragment_degaliniu_sarasas, container, false);
-        TextView atnaujinta = (TextView) v.findViewById(R.id.atnaujinta);
+        TextView atnaujinta = v.findViewById(R.id.atnaujinta);
         atnaujinta.setText(strDate);
 
-        //uzdedam spinneriui miestus, is kuriu galima rinktis
-        selectCity = (Spinner) v.findViewById(R.id.selectCity);
-        String[] Item = new String[]{"ALL", "Vilnius", "Kaunas", "Klaipeda"};
-        selectCity.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, Item));
-        selectCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-               // Items = selectCity.getSelectedItem().toString();
-
-            }
-
-
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        listview = (ListView)v.findViewById(R.id.listView);
+        listview = v.findViewById(R.id.listView);
 
         loadProducts();
-
-            selectCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-
 
         listview.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getActivity(), DegalinesInfoActivity.class);
@@ -116,8 +79,13 @@ public class degaliniuSarasasFragment extends Fragment {
             intent.putExtra("benzinas", list.getBenzinoKaina());
             intent.putExtra("dyzelis", list.getDyzelioKaina());
             intent.putExtra("dujos", list.getDujuKaina());
+            intent.putExtra("latitude", list.getLatitude());
+            intent.putExtra("longtitude", list.getLongtitude());
             startActivity(intent);
         });
+
+        //uzdedam spinneriui miestus, is kuriu galima rinktis
+        selectCity = v.findViewById(R.id.selectCity);
 
 
             return v;
@@ -153,8 +121,10 @@ public class degaliniuSarasasFragment extends Fragment {
         }
     }
 
+
+
     private void loadProducts() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, PRODUCT_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -165,31 +135,62 @@ public class degaliniuSarasasFragment extends Fragment {
                             for(int i =0;i<products.length();i++){
                                 JSONObject productObject = products.getJSONObject(i);
 
+
+
                                 int id = productObject.getInt("id");
                                 String miestas = productObject.getString("miestas");
                                 String pavadinimas = productObject.getString("pavadinimas");
                                 String adresas = productObject.getString("adresas");
-                                //String ikelimoData = productObject.getString("ikelimoData");
                                 String benzinoKaina = productObject.getString("benzinoKaina");
                                 String dyzelioKaina = productObject.getString("dyzelioKaina");
                                 String dujuKaina = productObject.getString("dujuKaina");
+                                double latitude = productObject.getDouble("latitude");
+                                double longtitude = productObject.getDouble("longtitude");
 
-                                Degalines degaline = new Degalines(id,miestas,pavadinimas,adresas,benzinoKaina,dyzelioKaina,dujuKaina);
+                                Degalines degaline = new Degalines(id,miestas,pavadinimas,adresas,benzinoKaina,dyzelioKaina,dujuKaina,latitude,longtitude);
+
 
                                 productList.add(degaline);
-                               /* System.out.println(miestas+" ");
+                                System.out.println(miestas+" ");
                                 System.out.println(pavadinimas+" ");
                                 System.out.println(adresas+" ");
-                                System.out.println(ikelimoData+" ");
                                 System.out.println(benzinoKaina+" ");
                                 System.out.println(dyzelioKaina+" ");
-                                System.out.println(dujuKaina+" ");*/
+                                System.out.println(dujuKaina+" ");
+                                System.out.println(latitude+" ");
+                                System.out.println(longtitude+" ");
+
+                                degalinesSpinner degalinespinneris = new degalinesSpinner(pavadinimas);
+                                spinnerList.add(degalinespinneris);
+
+
+
+                                String[] Item = {"All","Kaunas","Vilnius"};
+                                selectCity.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, Item));
+
+                               selectCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                                    }
+
+
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
 
 
                             }
                             DegalinesAdaptor degalinesAdaptor = new DegalinesAdaptor(getActivity(), R.layout.listview_row_data,productList);
 
                             listview.setAdapter(degalinesAdaptor);
+
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();

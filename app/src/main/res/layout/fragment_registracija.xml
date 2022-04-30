@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistracijaFragment"
+    tools:context=".login.RegistracijaFragment"
     android:background="@color/light_blue">
 
     <TextView
@@ -20,34 +20,33 @@
         android:orientation="vertical"
         android:gravity="center">
         <EditText
-            android:id="@+id/vartotojoVardas"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vartotojo vardas"
+            android:inputType="text"
+            android:hint="Prisijungimo vardas"
+            android:singleLine="true"
+            android:maxLines="1"
             android:layout_gravity="center"
             android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/elPastas"
+            android:id="@+id/password1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="El. pastas"
+            android:hint="Slaptazodis"
+            android:maxLines="1"
             android:layout_gravity="center"
+            android:inputType="textPassword"
             android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/slaptazodis1"
+            android:id="@+id/password2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Slaptažodis"
-            android:layout_gravity="center"
-            android:textColor="@color/white"/>
-
-        <EditText
-            android:id="@+id/slaptazodis2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Slaptažodis"
+            android:maxLines="1"
+            android:hint="Slaptazodis"
+            android:inputType="textPassword"
             android:layout_gravity="center"
             android:textColor="@color/white"/>
 

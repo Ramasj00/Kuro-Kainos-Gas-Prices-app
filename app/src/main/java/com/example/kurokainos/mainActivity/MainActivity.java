@@ -15,6 +15,9 @@ import com.example.kurokainos.R;
 import com.example.kurokainos.login.loginActivity;
 import com.google.android.material.navigation.NavigationView;
 
+
+
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -52,5 +55,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, loginActivity.class);
         startActivity(intent);
     }
+
 
 }

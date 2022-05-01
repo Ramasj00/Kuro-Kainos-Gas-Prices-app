@@ -11,8 +11,9 @@ package com.example.kurokainos.adapters;
          String DujuKaina;
          double Latitude;
          double Longtitude;
+         String IkelimoData;
 
-        public Degalines(int id,String miestas,String pavadinimas, String adresas, String benzinoKaina, String dyzelioKaina, String dujuKaina,double latitude,double longtitude){
+        public Degalines(int id,String miestas,String pavadinimas, String adresas, String benzinoKaina, String dyzelioKaina, String dujuKaina,double latitude,double longtitude, String ikelimoData){
             Pavadinimas = pavadinimas;
             Adresas = adresas;
             BenzinoKaina = benzinoKaina;
@@ -22,6 +23,7 @@ package com.example.kurokainos.adapters;
             Id=id;
             Latitude=latitude;
             Longtitude=longtitude;
+            IkelimoData=ikelimoData;
         }
 
          public double getLatitude() {
@@ -88,4 +90,12 @@ package com.example.kurokainos.adapters;
          public void setId(int id){
              Id = id;
          }
-}
+
+         public String getIkelimoData() {
+             return IkelimoData;
+         }
+
+         public void setIkelimoData(String ikelimoData) {
+             IkelimoData = ikelimoData;
+         }
+     }

@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -87,14 +86,14 @@ private Button loginButton;
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                                System.out.println(error);
+
                                 error.printStackTrace();
                             }
                         }) {
                             @Nullable
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
-                                Map<String, String> params = new HashMap<String, String>();
+                                Map<String, String> params = new HashMap<>();
                                 params.put("username", user);
                                 params.put("password", passwordas);
                                 return params;

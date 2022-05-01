@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/light_blue"
-    tools:context=".CommentListActivity">
+    tools:context=".singleDegaline.CommentListActivity">
 
 
 
@@ -107,6 +107,7 @@ android:layout_marginTop="10dp"
             android:layout_height="50dp"
             android:inputType="numberDecimal"
             android:hint="0.00"
+            android:maxLength="4"
             android:layout_marginRight="80dp"
             android:layout_gravity="center"
             android:textSize="20sp"
@@ -119,6 +120,7 @@ android:layout_marginTop="10dp"
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:hint="0.00"
+            android:maxLength="4"
             android:inputType="numberDecimal"
             android:layout_marginRight="80dp"
             android:layout_gravity="center"
@@ -132,6 +134,7 @@ android:layout_marginTop="10dp"
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:hint="0.00"
+            android:maxLength="4"
             android:inputType="numberDecimal"
             android:layout_gravity="center"
             android:textSize="20sp"
@@ -149,8 +152,16 @@ android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:layout_gravity="center"/>
 
-    <ListView
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_gravity="center"
         android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:textColor="#039BE5"/>
+
+    <ListView
         android:id="@+id/commentListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

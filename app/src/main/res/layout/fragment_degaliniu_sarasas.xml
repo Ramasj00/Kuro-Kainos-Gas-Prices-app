@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".mainActivity.degaliniuSarasasFragment">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
@@ -17,8 +18,7 @@
             android:textSize="17sp"
             android:textColor="@color/white"
             android:gravity="center"
-            android:text="PASKUTINĮ KARTĄ ATNAUJINTA:"
-            />
+            android:text="PASKUTINĮ KARTĄ ATNAUJINTA:"/>
 
         <TextView
             android:id="@+id/atnaujinta"
@@ -27,9 +27,7 @@
             android:textSize="17sp"
             android:gravity="center"
             android:textColor="@color/white"
-            android:text=""
-            />
-
+            android:text=""/>
 
     </LinearLayout>
 
@@ -38,13 +36,65 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:layout_marginRight="10dp"
+                android:id="@+id/kurasRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:checked="true"
+                    android:buttonTint="@color/white"
+
+                    android:id="@+id/benzinasRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Benzinas"/>
+
+                <RadioButton
+                    android:id="@+id/dyzelinasRadioBtn"
+                    android:buttonTint="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dyzelinas"/>
+
+                <RadioButton
+                    android:id="@+id/dujosRadioBtn"
+                    android:buttonTint="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dujos"/>
+            </RadioGroup>
+        <Button
+            android:id="@+id/mazejimoButton"
+            android:layout_width="120dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:text="Mažėjimo"/>
+
+        <Button
+            android:id="@+id/didejimoButton"
+            android:layout_width="120dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:text="Didėjimo"/>
+        </LinearLayout>
         <Spinner
-            android:id="@+id/selectCity"
-            android:background="#A5C6E4"
+            android:id="@+id/spinner"
+            android:background="@drawable/spinner_round_corners"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:spinnerMode="dropdown"
-            android:layout_marginTop="24dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
         <View
@@ -56,8 +106,7 @@
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent"/>
 
 
 
@@ -65,4 +114,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

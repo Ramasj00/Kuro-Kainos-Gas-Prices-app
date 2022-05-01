@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KuroKainos">
         <activity
-            android:name=".CommentListActivity"
+            android:name=".singleDegaline.CommentListActivity"
             android:exported="false" />
         <activity
             android:name=".login.loginActivity"

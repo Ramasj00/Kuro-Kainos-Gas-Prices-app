@@ -9,9 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.kurokainos.CommentListActivity;
 import com.example.kurokainos.R;
-import com.example.kurokainos.singleDegaline.MapsFragment;
 
 public class DegalinesInfoActivity extends AppCompatActivity {
     TextView degalinesPavadinimas;

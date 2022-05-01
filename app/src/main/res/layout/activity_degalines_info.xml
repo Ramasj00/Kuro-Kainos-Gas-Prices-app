@@ -127,6 +127,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:gravity="center"
+            android:layout_marginBottom="10dp"
             android:text="ŽEMĖLAPIS"
             android:textColor="@color/very_light_blue"
             android:textSize="24sp" />

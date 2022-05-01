@@ -191,6 +191,7 @@ public class degaliniuSarasasFragment extends Fragment {
         Volley.newRequestQueue(getContext()).add(stringRequest);
 
     }
+
     private void SortByMazejimoByBenzinas() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
                 response -> {
@@ -244,6 +245,7 @@ public class degaliniuSarasasFragment extends Fragment {
 
         Volley.newRequestQueue(getContext()).add(stringRequest);
     }
+
     private void SortByMazejimoByDiesel() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
                 response -> {
@@ -347,8 +349,6 @@ public class degaliniuSarasasFragment extends Fragment {
 
         Volley.newRequestQueue(getContext()).add(stringRequest);
     }
-
-
 
     private void SortByDidejmoByBenzinas() {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,

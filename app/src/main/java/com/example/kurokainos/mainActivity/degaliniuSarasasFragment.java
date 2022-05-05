@@ -3,15 +3,19 @@ package com.example.kurokainos.mainActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -47,12 +51,16 @@ public class degaliniuSarasasFragment extends Fragment {
     private DegalinesAdaptor adaptor;
     private static final String degaliniulistapi = "https://192.168.0.90/MyApi/Api.php";
     private RadioGroup kurasRadioGroup;
+    private DrawerLayout drawerLayout;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SortByMazejimoByBenzinas();
         handleSSLHandshake();
+
+
 
     }
 
@@ -61,18 +69,19 @@ public class degaliniuSarasasFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
         View v = inflater.inflate(R.layout.fragment_degaliniu_sarasas, container, false);
+
+
+        drawerLayout = v.findViewById(R.id.drawerLayout);
 
         didejimo = v.findViewById(R.id.didejimoButton);
         mazejimo = v.findViewById(R.id.mazejimoButton);
         didejimo.setVisibility(View.GONE);
-        mySpinner=v.findViewById(R.id.spinner);
+
         listview = v.findViewById(R.id.listView);
 
+        mySpinner=v.findViewById(R.id.spinner);
 
-
-        //didejimo.setVisibility(v.VISIBLE);
 
         mazejimo.setOnClickListener(view -> {
             productList.clear();
@@ -89,13 +98,15 @@ public class degaliniuSarasasFragment extends Fragment {
 
             SortByMazejimoByBenzinas();
         });
+        loadData();
 
+        /*spinneris ();*/
 
         kurasRadioGroup = v.findViewById(R.id.kurasRadioGroup);
 
         Sortas();
 
-        loadData();
+        SortByMazejimoByBenzinas();
 
         atnaujinta=v.findViewById(R.id.atnaujinta);
 
@@ -112,6 +123,7 @@ public class degaliniuSarasasFragment extends Fragment {
             intent.putExtra("longtitude", list.getLongtitude());
             startActivity(intent);
         });
+        /*spinneris();*/
 
         //uzdedam spinneriui miestus, is kuriu galima rinktis
 
@@ -158,6 +170,8 @@ public class degaliniuSarasasFragment extends Fragment {
 
                         for(int i =0;i<products.length();i++){
                             JSONObject productObject = products.getJSONObject(i);
+
+                            System.out.println(i);
 
                             int id = productObject.getInt("id");
                             String miestas = productObject.getString("miestas");
@@ -217,7 +231,7 @@ public class degaliniuSarasasFragment extends Fragment {
 
                             productList.add(degaline);
 
-                            atnaujinta.setText(ikelimoData);
+
 
                         }
 
@@ -441,6 +455,8 @@ public class degaliniuSarasasFragment extends Fragment {
 
                                     atnaujinta.setText(ikelimoData);
 
+                                    productList.removeIf(s -> s.getDujuKaina().equals("0"));
+
                             }
 
                             Collections.sort(productList, new Comparator<Degalines>() {
@@ -503,6 +519,8 @@ public class degaliniuSarasasFragment extends Fragment {
 
                                 atnaujinta.setText(ikelimoData);
 
+                                productList.removeIf(s -> s.getDujuKaina().equals("0"));
+
                             }
 
                             Collections.sort(productList, new Comparator<Degalines>() {
@@ -540,6 +558,10 @@ public class degaliniuSarasasFragment extends Fragment {
         kurasRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
             switch (i){
                 case R.id.benzinasRadioBtn:
+                    productList.clear();
+                    SortByDidejmoByBenzinas();
+                    mazejimo.setVisibility(View.GONE);
+                    didejimo.setVisibility(View.VISIBLE);
                     mazejimo.setOnClickListener(view -> {
                         productList.clear();
                         mazejimo.setVisibility(View.GONE);
@@ -557,6 +579,10 @@ public class degaliniuSarasasFragment extends Fragment {
                     });
                     break;
                 case R.id.dyzelinasRadioBtn:
+                    productList.clear();
+                    SortByDidejmoByDiesel();
+                    mazejimo.setVisibility(View.GONE);
+                    didejimo.setVisibility(View.VISIBLE);
                     mazejimo.setOnClickListener(view -> {
                         productList.clear();
                         mazejimo.setVisibility(View.GONE);
@@ -574,6 +600,10 @@ public class degaliniuSarasasFragment extends Fragment {
                     });
                     break;
                 case R.id.dujosRadioBtn:
+                    productList.clear();
+                    SortByDidejmoByDujos();
+                    mazejimo.setVisibility(View.GONE);
+                    didejimo.setVisibility(View.VISIBLE);
                     mazejimo.setOnClickListener(view -> {
                         productList.clear();
                         mazejimo.setVisibility(View.GONE);
@@ -597,5 +627,20 @@ public class degaliniuSarasasFragment extends Fragment {
         });
 
     }
+
+
+   /* private void spinneris (){
+
+
+
+        ArrayList<String> miestai = new ArrayList<>();
+        miestai.add("all");
+        miestai.add("Vilnius");
+        miestai.add("Kaunas");
+        miestai.add("Klaipeda");
+
+        ArrayAdapter<String> spinerioAdapteris =  new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item,miestai);
+        mySpinner.setAdapter(spinerioAdapteris);
+    }*/
 
 }

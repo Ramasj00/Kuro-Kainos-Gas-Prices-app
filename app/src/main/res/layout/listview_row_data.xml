@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="240dp"
+        android:layout_marginRight="190dp"
         android:orientation="vertical"
         android:padding="20dp">
 
@@ -14,31 +14,36 @@
             android:id="@+id/degalinesPavadinimas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Viada" />
+            android:text="Viada"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/degalinesAdresas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Justiniškių g. 12" />
+
+            android:layout_marginTop="10dp"
+            android:text="Ukmerges g 437 Vilnius"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="170dp"
+
+        android:layout_marginLeft="200dp"
         android:orientation="vertical"
         android:padding="10dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="95" />
+            android:text="Benzinas" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DK" />
+            android:text="Dyzelinas" />
 
         <TextView
             android:layout_width="match_parent"

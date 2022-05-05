@@ -1,19 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="80dp"
     android:padding="10dp"
+android:layout_margin="10dp"
     android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Benzinas"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="40dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dyzelis"
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="40dp"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:text="Dujos"
+                    android:textSize="15sp"/>
+
+        </LinearLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
         <TextView
             android:id="@+id/benzinoKaina"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="95"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_marginRight="40dp"/>
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/dyzelinoKaina"
@@ -21,31 +54,64 @@
             android:layout_height="wrap_content"
             android:text="DK"
             android:textColor="@color/black"
-            android:layout_marginRight="40dp"
-            android:textSize="20sp"/>
+
+            android:textSize="15sp"/>
         <TextView
             android:id="@+id/dujuKaina"
             android:layout_width="wrap_content"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:text="Dujos"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
+</LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="bottom|right">
+            android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/euras"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"/>
 
                 <TextView
-                    android:id="@+id/commentData"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/euras"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+                <TextView
+
                     android:layout_width="wrap_content"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content"
-                    android:text="DataLaikas"
-                    android:layout_marginLeft="30dp"
+                    android:text="@string/euras"
                     android:textSize="15sp"/>
+        </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="end|bottom">
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/commentData"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+
+
+            android:layout_height="wrap_content"
+            android:text="DataLaikas"
+
+            android:textSize="13sp"/>
+
+</LinearLayout>
+
+
+
+
 
 
 

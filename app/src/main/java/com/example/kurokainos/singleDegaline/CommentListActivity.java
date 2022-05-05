@@ -38,7 +38,7 @@ private EditText comBenz;
     private EditText comDyz;
     private EditText comDuj;
     private Button siustiBtn;
-    private ArrayList<DegalinesCommentList> productList = new ArrayList<>();
+    private final ArrayList<DegalinesCommentList> productList = new ArrayList<>();
     private static final String sendcommentapi = "https://192.168.0.90/MyApi/sendcommentapi.php";
     private static final String commentList =  "https://192.168.0.90/MyApi/commentlistapi.php";
     private DegalinesCommentListAdapter adapter;

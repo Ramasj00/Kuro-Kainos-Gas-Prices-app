@@ -18,9 +18,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsFragment extends Fragment {
-private double longt;
-private double lat;
-private String degPavadinimas;
+private final double longt;
+private final double lat;
+private final String degPavadinimas;
 
 
    public MapsFragment(double longt, double lat, String degPavadinimas){
@@ -29,7 +29,7 @@ private String degPavadinimas;
        this.degPavadinimas=degPavadinimas;
    }
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
 

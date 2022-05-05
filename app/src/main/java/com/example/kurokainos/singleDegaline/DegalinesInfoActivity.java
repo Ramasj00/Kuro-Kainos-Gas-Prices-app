@@ -25,11 +25,11 @@ public class DegalinesInfoActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_degalines_info);
 
-        degalinesPavadinimas = (TextView) findViewById(R.id.degalinesPavadinimas);
-        degalinesAdresas = (TextView) findViewById(R.id.degalinesAdresas);
-        benzinas = (TextView) findViewById(R.id.benzinas);
-        dyzelis = (TextView) findViewById(R.id.dyzelis);
-        dujos = (TextView) findViewById(R.id.dujos);
+        degalinesPavadinimas = findViewById(R.id.degalinesPavadinimas);
+        degalinesAdresas = findViewById(R.id.degalinesAdresas);
+        benzinas = findViewById(R.id.benzinas);
+        dyzelis = findViewById(R.id.dyzelis);
+        dujos = findViewById(R.id.dujos);
 
 
         Intent intent = getIntent();

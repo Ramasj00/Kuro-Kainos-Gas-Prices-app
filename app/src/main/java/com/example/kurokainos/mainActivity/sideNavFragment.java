@@ -30,9 +30,9 @@ import java.util.ArrayList;
 
 public class sideNavFragment extends Fragment {
     private static final String locationapi = "https://192.168.0.90/MyApi/locationapi.php";
-    private ArrayList<DegalinesLocation> productList = new ArrayList<>();
+    private final ArrayList<DegalinesLocation> productList = new ArrayList<>();
     private GoogleMap mMap;
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
 
         @Override

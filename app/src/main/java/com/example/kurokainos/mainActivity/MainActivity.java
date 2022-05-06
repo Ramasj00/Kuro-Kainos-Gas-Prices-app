@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
             findViewById(R.id.imageMenu).setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
 
-
-
-
             //side nav mygtuku prrogramavimas
             NavigationView navigationView = findViewById(R.id.navigationView);
 

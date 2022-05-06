@@ -4,36 +4,47 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.kurokainos.adapters.Constant;
+import com.example.kurokainos.adapters.Degalines;
 import com.example.kurokainos.adapters.DegalinesLocation;
 import com.example.kurokainos.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class sideNavFragment extends Fragment {
-    private static final String locationapi = "https://192.168.0.90/MyApi/locationapi.php";
+
     private final ArrayList<DegalinesLocation> productList = new ArrayList<>();
     private GoogleMap mMap;
+    private FusedLocationProviderClient client;
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
-
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
@@ -41,7 +52,7 @@ public class sideNavFragment extends Fragment {
             //sukuria naujus markerius
             loadLocation();
 
-            mMap  =googleMap;
+            mMap = googleMap;
 
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
@@ -53,19 +64,6 @@ public class sideNavFragment extends Fragment {
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-
-
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-
 
         }
     };
@@ -89,7 +87,7 @@ public class sideNavFragment extends Fragment {
     }
 
     private void loadLocation() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, locationapi,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.LOCATION_API,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -97,10 +95,11 @@ public class sideNavFragment extends Fragment {
 
                             JSONArray products = new JSONArray(response);
 
-                            for(int i =0;i<products.length();i++){
+                            for (int i = 0; i < products.length(); i++) {
                                 JSONObject productObject = products.getJSONObject(i);
 
 
+                                String pavadinimas = productObject.getString("pavadinimas");
                                 String adresas = productObject.getString("adresas");
                                 String latitude = productObject.getString("latitude");
                                 String longtitude = productObject.getString("longtitude");
@@ -108,17 +107,18 @@ public class sideNavFragment extends Fragment {
                                 double lat = Double.parseDouble(latitude);
                                 double longt = Double.parseDouble(longtitude);
 
-                                DegalinesLocation location = new DegalinesLocation(adresas,lat,longt);
+                                DegalinesLocation location = new DegalinesLocation(pavadinimas, adresas, lat, longt);
 
                                 productList.add(location);
+
 
                                 LatLng vilnius = new LatLng(54.720893849999996, 25.284759795951338);
                                 mMap.addMarker(new MarkerOptions().position(vilnius).title("Kalvarijų g. 204G Vilnius"));
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius, 15f));
 
-                                for(int j=0;j<productList.size();j++) {
+                                for (int j = 0; j < productList.size(); j++) {
                                     LatLng locationn = new LatLng(productList.get(j).getLatitude(), productList.get(j).getLongtitude());
-                                    mMap.addMarker(new MarkerOptions().position(locationn).title(productList.get(j).getAdresas()));
+                                    mMap.addMarker(new MarkerOptions().position(locationn).title(productList.get(j).getPavadinimas()));
                                 }
 
 
@@ -137,4 +137,6 @@ public class sideNavFragment extends Fragment {
 
         Volley.newRequestQueue(getContext()).add(stringRequest);
     }
+
+
 }

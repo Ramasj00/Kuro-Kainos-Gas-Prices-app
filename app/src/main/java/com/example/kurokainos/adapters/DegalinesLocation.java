@@ -1,17 +1,27 @@
 package com.example.kurokainos.adapters;
 
 public class DegalinesLocation {
+    String pavadinimas;
     String adresas;
     double latitude;
     double longtitude;
 
 
-    public DegalinesLocation(String adresas, double latitude, double longtitude) {
+
+    public DegalinesLocation( String pavadinimas,String adresas, double latitude, double longtitude) {
+        this.pavadinimas = pavadinimas;
         this.adresas = adresas;
         this.latitude = latitude;
         this.longtitude = longtitude;
+
+    }
+    public String getPavadinimas() {
+        return pavadinimas;
     }
 
+    public void setPavadinimas(String pavadinimas) {
+        this.pavadinimas = pavadinimas;
+    }
 
     public String getAdresas() {
         return adresas;

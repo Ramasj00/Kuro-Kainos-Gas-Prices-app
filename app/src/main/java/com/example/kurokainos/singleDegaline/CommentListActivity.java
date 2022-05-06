@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kurokainos.R;
+import com.example.kurokainos.adapters.Constant;
 import com.example.kurokainos.adapters.DegalinesCommentList;
 import com.example.kurokainos.adapters.DegalinesCommentListAdapter;
 import org.json.JSONArray;
@@ -31,19 +32,15 @@ import java.util.Locale;
 import java.util.Map;
 
 public class CommentListActivity extends AppCompatActivity {
- private TextView degalinesPavadinimas;
- private TextView degalinesAdresas;
- private ListView commentListView;
-private EditText comBenz;
+    private TextView degalinesPavadinimas;
+    private TextView degalinesAdresas;
+    private ListView commentListView;
+    private EditText comBenz;
     private EditText comDyz;
     private EditText comDuj;
     private Button siustiBtn;
     private final ArrayList<DegalinesCommentList> productList = new ArrayList<>();
-    private static final String sendcommentapi = "https://192.168.0.90/MyApi/sendcommentapi.php";
-    private static final String commentList =  "https://192.168.0.90/MyApi/commentlistapi.php";
     private DegalinesCommentListAdapter adapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +57,12 @@ private EditText comBenz;
 
         Intent intent = getIntent();
 
-
         String degPavadinimas = intent.getStringExtra("degalinesPavadinimas");
         String degAdresas = intent.getStringExtra("degalinesAdresas");
 
         degalinesPavadinimas.setText(degPavadinimas);
         degalinesAdresas.setText(degAdresas);
-
         commentListView = findViewById(R.id.commentListView);
-
-
 
 
         siustiBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +79,6 @@ private EditText comBenz;
                 laikas=strDate;
                 adresas=degAdresas;
 
-
-
                 if(benz.equals("")||dyz.equals("")||duj.equals("")){
                     Toast.makeText(getApplicationContext(), "Prasau uzpildyti visas kainas!", Toast.LENGTH_SHORT).show();
                 }
@@ -96,7 +87,7 @@ private EditText comBenz;
                 } else{
                     productList.clear();
 
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, sendcommentapi,
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.SEND_COMMENT_API,
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
@@ -142,15 +133,10 @@ private EditText comBenz;
 
                 }
             });
-
-
     }
 
-
-
-
     private void loadData(){
-        StringRequest stringRequest = new StringRequest(Request.Method.DEPRECATED_GET_OR_POST, commentList,
+        StringRequest stringRequest = new StringRequest(Request.Method.DEPRECATED_GET_OR_POST, Constant.COMMENT_LIST,
                 new Response.Listener<String>() {
 
                     @Override
@@ -177,9 +163,7 @@ private EditText comBenz;
                                 System.out.println(dujuKaina+" ");
                                 System.out.println(komentaroData+" ");
 
-
                             }
-
                             adapter = new DegalinesCommentListAdapter(getApplicationContext(), R.layout.commentlistview_row_data,productList);
                             commentListView.setAdapter(adapter);
 

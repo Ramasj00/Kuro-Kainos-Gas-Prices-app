@@ -1,6 +1,5 @@
 package com.example.kurokainos.adapters;
 
-
      public  class Degalines{
          int Id;
          String Miestas;
@@ -62,6 +61,24 @@ package com.example.kurokainos.adapters;
          public void setDyzelioKainaKaina(String dyzelioKaina){
              DyzelioKaina = dyzelioKaina;
          }
+
+         public String getKuroKaina(String kuroTipas)
+         {
+             String kaina="";
+             switch(kuroTipas){
+                 case "benzinas":
+                     kaina=BenzinoKaina;
+                     break;
+                 case "dyzelis":
+                     kaina=DyzelioKaina;
+                     break;
+                 case "dujos":
+                     kaina=DujuKaina;
+                     break;
+             }
+             return kaina;
+         }
+
 
          public String getBenzinoKaina(){
              return BenzinoKaina;

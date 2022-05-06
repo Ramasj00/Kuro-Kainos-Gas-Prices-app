@@ -15,12 +15,10 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.kurokainos.adapters.Constant;
 import com.example.kurokainos.adapters.Degalines;
 import com.example.kurokainos.adapters.DegalinesAdaptor;
 import com.example.kurokainos.singleDegaline.DegalinesInfoActivity;
@@ -40,80 +38,61 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-
 public class degaliniuSarasasFragment extends Fragment {
     private Spinner mySpinner;
-    private final ArrayList<Degalines> productList = new ArrayList<>();
+    private ArrayList<Degalines> degaliniuList = new ArrayList<>();
     private ListView listview;
     private TextView atnaujinta;
     private Button didejimo;
     private Button mazejimo;
     private DegalinesAdaptor adaptor;
-    private static final String degaliniulistapi = "https://192.168.0.90/MyApi/Api.php";
     private RadioGroup kurasRadioGroup;
-    private DrawerLayout drawerLayout;
-
+    private boolean didejimoTvarka;
+    private String kuroTipas;
+    private String filtruojamasMiestas;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SortByMazejimoByBenzinas();
         handleSSLHandshake();
-
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        didejimoTvarka=false;
+        kuroTipas="benzinas";
+        filtruojamasMiestas="visi";
         View v = inflater.inflate(R.layout.fragment_degaliniu_sarasas, container, false);
-
-
-        drawerLayout = v.findViewById(R.id.drawerLayout);
 
         didejimo = v.findViewById(R.id.didejimoButton);
         mazejimo = v.findViewById(R.id.mazejimoButton);
-        didejimo.setVisibility(View.GONE);
-
-        listview = v.findViewById(R.id.listView);
-
-        mySpinner=v.findViewById(R.id.spinner);
-
-
-        mazejimo.setOnClickListener(view -> {
-            productList.clear();
-            mazejimo.setVisibility(View.GONE);
-            didejimo.setVisibility(View.VISIBLE);
-
-            SortByDidejmoByBenzinas();
-        });
-
-        didejimo.setOnClickListener(view -> {
-            productList.clear();
-            mazejimo.setVisibility(View.VISIBLE);
-            didejimo.setVisibility(View.GONE);
-
-            SortByMazejimoByBenzinas();
-        });
-        loadData();
-
-        /*spinneris ();*/
-
         kurasRadioGroup = v.findViewById(R.id.kurasRadioGroup);
-
-        Sortas();
-
-        SortByMazejimoByBenzinas();
-
+        listview = v.findViewById(R.id.listView);
+        mySpinner=v.findViewById(R.id.spinner);
         atnaujinta=v.findViewById(R.id.atnaujinta);
 
+        didejimo.setVisibility(View.GONE);
+        mazejimo.setOnClickListener(view -> {
+           didejimoTvarka=true;
+           loadData();
+            mazejimo.setVisibility(View.GONE);
+            didejimo.setVisibility(View.VISIBLE);
+         });
+
+        didejimo.setOnClickListener(view -> {
+            didejimoTvarka=false;
+            loadData();
+            mazejimo.setVisibility(View.VISIBLE);
+            didejimo.setVisibility(View.GONE);
+        });
+        spinneris();
+        radioButtonFiltras();
 
         listview.setOnItemClickListener((parent, view, position, id) -> {
             Intent intent = new Intent(getActivity(), DegalinesInfoActivity.class);
-            Degalines list = productList.get(position);
+            Degalines list = degaliniuList.get(position);
             intent.putExtra("degalinesPavadinimas", list.getPavadinimas());
             intent.putExtra("degalinesAdresas", list.getAdresas());
             intent.putExtra("benzinas", list.getBenzinoKaina());
@@ -123,12 +102,8 @@ public class degaliniuSarasasFragment extends Fragment {
             intent.putExtra("longtitude", list.getLongtitude());
             startActivity(intent);
         });
-        /*spinneris();*/
 
-        //uzdedam spinneriui miestus, is kuriu galima rinktis
-
-
-            return v;
+        return v;
         }
 
     @SuppressLint("TrulyRandom")
@@ -160,18 +135,14 @@ public class degaliniuSarasasFragment extends Fragment {
         } catch (Exception ignored) {
         }
     }
-
     public void loadData(){
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
-                response -> {
+        degaliniuList.clear();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.DEGALINIU_LIST_API, response -> {
                     try {
-
-                        JSONArray products = new JSONArray(response);
-
-                        for(int i =0;i<products.length();i++){
-                            JSONObject productObject = products.getJSONObject(i);
-
-                            System.out.println(i);
+                        JSONArray degalines = new JSONArray(response);
+                        for(int i =0;i<degalines.length();i++){
+                            JSONObject productObject = degalines.getJSONObject(i);
 
                             int id = productObject.getInt("id");
                             String miestas = productObject.getString("miestas");
@@ -182,465 +153,91 @@ public class degaliniuSarasasFragment extends Fragment {
                             String dujuKaina = productObject.getString("dujuKaina");
                             double latitude = productObject.getDouble("latitude");
                             double longtitude = productObject.getDouble("longtitude");
-                            String ikelimoData = productObject.getString("ikelimoData");
+                            String atnaujinimoData = productObject.getString("ikelimoData");
 
-                            Degalines degaline = new Degalines(id,miestas,pavadinimas,adresas,benzinoKaina,dyzelioKaina,dujuKaina,latitude,longtitude,ikelimoData);
+                            if(filtruojamasMiestas.equals(miestas) || filtruojamasMiestas.equals("visi")) {
+                                Degalines degaline = new Degalines(id, miestas, pavadinimas, adresas, benzinoKaina, dyzelioKaina, dujuKaina, latitude, longtitude, atnaujinimoData);
 
-                            productList.add(degaline);
-
-                            atnaujinta.setText(ikelimoData);
-
+                                if(Float.parseFloat(degaline.getKuroKaina(kuroTipas)) > 0) {
+                                    degaliniuList.add(degaline);
+                                }
+                                atnaujinta.setText(atnaujinimoData);
+                            }
                         }
-
-                        adaptor = new DegalinesAdaptor(getContext(), R.layout.listview_row_data,productList);
-
-                        listview.setAdapter(adaptor);
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }, error -> System.out.println(error));
-
-        Volley.newRequestQueue(getContext()).add(stringRequest);
-
-    }
-
-    private void SortByMazejimoByBenzinas() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
-                response -> {
-                    try {
-
-                        JSONArray products = new JSONArray(response);
-
-                        for(int i =0;i<products.length();i++){
-                            JSONObject productObject = products.getJSONObject(i);
-
-                            int id = productObject.getInt("id");
-                            String miestas = productObject.getString("miestas");
-                            String pavadinimas = productObject.getString("pavadinimas");
-                            String adresas = productObject.getString("adresas");
-                            String benzinoKaina = productObject.getString("benzinoKaina");
-                            String dyzelioKaina = productObject.getString("dyzelioKaina");
-                            String dujuKaina = productObject.getString("dujuKaina");
-                            double latitude = productObject.getDouble("latitude");
-                            double longtitude = productObject.getDouble("longtitude");
-                            String ikelimoData = productObject.getString("ikelimoData");
-
-                            Degalines degaline = new Degalines(id,miestas,pavadinimas,adresas,benzinoKaina,dyzelioKaina,dujuKaina,latitude,longtitude,ikelimoData);
-
-                            productList.add(degaline);
-
-
-
-                        }
-
-                        Collections.sort(productList, new Comparator<Degalines>() {
+                        Collections.sort(degaliniuList, new Comparator<Degalines>() {
                             @Override
                             public int compare(Degalines degalines, Degalines t1) {
-                                float benz1 = Float.parseFloat(degalines.getBenzinoKaina());
-                                float benz2 = Float.parseFloat(t1.getBenzinoKaina());
-                                if(benz1>benz2)     {
-                                    return -1;
-                                } else{
-                                    return 1;
+                                float kaina1 = Float.parseFloat(degalines.getKuroKaina(kuroTipas));
+                                float kaina2 = Float.parseFloat(t1.getKuroKaina(kuroTipas));
+                                if(kaina1<kaina2){
+                                    if(didejimoTvarka){
+                                        return -1;
+                                    } else {
+                                        return 1;
+                                    }
+                                }else{
+                                    if(didejimoTvarka){
+                                        return 1;
+                                    } else {
+                                        return -1;
+                                    }
                                 }
                             }});
 
-                        adaptor = new DegalinesAdaptor(getContext(), R.layout.listview_row_data,productList);
-
+                        adaptor = new DegalinesAdaptor(getContext(), R.layout.listview_row_data,degaliniuList);
                         listview.setAdapter(adaptor);
-
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }, error -> System.out.println(error));
-
         Volley.newRequestQueue(getContext()).add(stringRequest);
     }
-
-    private void SortByMazejimoByDiesel() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
-                response -> {
-                    try {
-
-                        JSONArray products = new JSONArray(response);
-
-                        for(int i =0;i<products.length();i++){
-                            JSONObject productObject = products.getJSONObject(i);
-
-                            int id = productObject.getInt("id");
-                            String miestas = productObject.getString("miestas");
-                            String pavadinimas = productObject.getString("pavadinimas");
-                            String adresas = productObject.getString("adresas");
-                            String benzinoKaina = productObject.getString("benzinoKaina");
-                            String dyzelioKaina = productObject.getString("dyzelioKaina");
-                            String dujuKaina = productObject.getString("dujuKaina");
-                            double latitude = productObject.getDouble("latitude");
-                            double longtitude = productObject.getDouble("longtitude");
-                            String ikelimoData = productObject.getString("ikelimoData");
-
-                            Degalines degaline = new Degalines(id,miestas,pavadinimas,adresas,benzinoKaina,dyzelioKaina,dujuKaina,latitude,longtitude,ikelimoData);
-
-                            productList.add(degaline);
-
-                            atnaujinta.setText(ikelimoData);
-
-                        }
-
-                        Collections.sort(productList, (degalines, t1) -> {
-                            float dyz1 = Float.parseFloat(degalines.getDyzelioKaina());
-                            float dyz2 = Float.parseFloat(t1.getDyzelioKaina());
-                            if(dyz1>dyz2)     {
-                                return -1;
-                            } else{
-                                return 1;
-                            }
-                        });
-
-                        adaptor = new DegalinesAdaptor(getActivity(), R.layout.listview_row_data,productList);
-
-                        listview.setAdapter(adaptor);
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }, error -> System.out.println(error));
-
-        Volley.newRequestQueue(getContext()).add(stringRequest);
-    }
-
-    private void SortByDidejmoByDiesel() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
-                response -> {
-                    try {
-
-                        JSONArray products = new JSONArray(response);
-
-                        for(int i =0;i<products.length();i++){
-                            JSONObject productObject = products.getJSONObject(i);
-
-                            int id = productObject.getInt("id");
-                            String miestas = productObject.getString("miestas");
-                            String pavadinimas = productObject.getString("pavadinimas");
-                            String adresas = productObject.getString("adresas");
-                            String benzinoKaina = productObject.getString("benzinoKaina");
-                            String dyzelioKaina = productObject.getString("dyzelioKaina");
-                            String dujuKaina = productObject.getString("dujuKaina");
-                            double latitude = productObject.getDouble("latitude");
-                            double longtitude = productObject.getDouble("longtitude");
-                            String ikelimoData = productObject.getString("ikelimoData");
-
-                            Degalines degaline = new Degalines(id,miestas,pavadinimas,adresas,benzinoKaina,dyzelioKaina,dujuKaina,latitude,longtitude,ikelimoData);
-
-                            productList.add(degaline);
-
-                            atnaujinta.setText(ikelimoData);
-
-                        }
-
-                        Collections.sort(productList, (degalines, t1) -> {
-                            float dyz1 = Float.parseFloat(degalines.getDyzelioKaina());
-                            float dyz2 = Float.parseFloat(t1.getDyzelioKaina());
-                            if(dyz1<dyz2)     {
-                                return -1;
-                            } else{
-                                return 1;
-                            }
-                        });
-
-                        adaptor = new DegalinesAdaptor(getActivity(), R.layout.listview_row_data,productList);
-
-                        listview.setAdapter(adaptor);
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }, error -> System.out.println(error));
-
-        Volley.newRequestQueue(getContext()).add(stringRequest);
-    }
-
-    private void SortByDidejmoByBenzinas() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-
-                            JSONArray products = new JSONArray(response);
-
-                            for(int i =0;i<products.length();i++){
-                                JSONObject productObject = products.getJSONObject(i);
-
-                                int id = productObject.getInt("id");
-                                String miestas = productObject.getString("miestas");
-                                String pavadinimas = productObject.getString("pavadinimas");
-                                String adresas = productObject.getString("adresas");
-                                String benzinoKaina = productObject.getString("benzinoKaina");
-                                String dyzelioKaina = productObject.getString("dyzelioKaina");
-                                String dujuKaina = productObject.getString("dujuKaina");
-                                double latitude = productObject.getDouble("latitude");
-                                double longtitude = productObject.getDouble("longtitude");
-                                String ikelimoData = productObject.getString("ikelimoData");
-
-                                Degalines degaline = new Degalines(id,miestas,pavadinimas,adresas,benzinoKaina,dyzelioKaina,dujuKaina,latitude,longtitude,ikelimoData);
-
-                                productList.add(degaline);
-
-                                atnaujinta.setText(ikelimoData);
-
-                            }
-
-                            Collections.sort(productList, new Comparator<Degalines>() {
-                                @Override
-                                public int compare(Degalines degalines, Degalines t1) {
-                                    float benz1 = Float.parseFloat(degalines.getBenzinoKaina());
-                                    float benz2 = Float.parseFloat(t1.getBenzinoKaina());
-                                    if(benz1<benz2)     {
-                                        return -1;
-                                    } else{
-                                        return 1;
-                                    }
-                                }});
-
-                            adaptor = new DegalinesAdaptor(getActivity(), R.layout.listview_row_data,productList);
-
-                            listview.setAdapter(adaptor);
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        });
-
-        Volley.newRequestQueue(getContext()).add(stringRequest);
-    }
-
-    private void SortByMazejimoByDujos() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-
-                            JSONArray products = new JSONArray(response);
-
-                            for(int i =0;i<products.length();i++){
-                                JSONObject productObject = products.getJSONObject(i);
-
-                                int id = productObject.getInt("id");
-                                String miestas = productObject.getString("miestas");
-                                String pavadinimas = productObject.getString("pavadinimas");
-                                String adresas = productObject.getString("adresas");
-                                String benzinoKaina = productObject.getString("benzinoKaina");
-                                String dyzelioKaina = productObject.getString("dyzelioKaina");
-                                String dujuKaina = productObject.getString("dujuKaina");
-                                double latitude = productObject.getDouble("latitude");
-                                double longtitude = productObject.getDouble("longtitude");
-                                String ikelimoData = productObject.getString("ikelimoData");
-
-                                Degalines degaline = new Degalines(id,miestas,pavadinimas,adresas,benzinoKaina,dyzelioKaina,dujuKaina,latitude,longtitude,ikelimoData);
-
-                                    productList.add(degaline);
-
-                                    atnaujinta.setText(ikelimoData);
-
-                                    productList.removeIf(s -> s.getDujuKaina().equals("0"));
-
-                            }
-
-                            Collections.sort(productList, new Comparator<Degalines>() {
-                                @Override
-                                public int compare(Degalines degalines, Degalines t1) {
-                                    float dyz1 = Float.parseFloat(degalines.getDujuKaina());
-                                    float dyz2 = Float.parseFloat(t1.getDujuKaina());
-                                    if(dyz1>dyz2)     {
-                                        return -1;
-                                    } else{
-                                        return 1;
-                                    }
-                                }});
-
-                            adaptor = new DegalinesAdaptor(getContext(), R.layout.listview_row_data,productList);
-
-                            listview.setAdapter(adaptor);
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        });
-
-        Volley.newRequestQueue(getContext()).add(stringRequest);
-    }
-
-    private void SortByDidejmoByDujos() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, degaliniulistapi,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-
-                            JSONArray products = new JSONArray(response);
-
-                            for(int i =0;i<products.length();i++){
-                                JSONObject productObject = products.getJSONObject(i);
-
-                                int id = productObject.getInt("id");
-                                String miestas = productObject.getString("miestas");
-                                String pavadinimas = productObject.getString("pavadinimas");
-                                String adresas = productObject.getString("adresas");
-                                String benzinoKaina = productObject.getString("benzinoKaina");
-                                String dyzelioKaina = productObject.getString("dyzelioKaina");
-                                String dujuKaina = productObject.getString("dujuKaina");
-                                double latitude = productObject.getDouble("latitude");
-                                double longtitude = productObject.getDouble("longtitude");
-                                String ikelimoData = productObject.getString("ikelimoData");
-
-                                Degalines degaline = new Degalines(id,miestas,pavadinimas,adresas,benzinoKaina,dyzelioKaina,dujuKaina,latitude,longtitude,ikelimoData);
-
-                                productList.add(degaline);
-
-                                atnaujinta.setText(ikelimoData);
-
-                                productList.removeIf(s -> s.getDujuKaina().equals("0"));
-
-                            }
-
-                            Collections.sort(productList, new Comparator<Degalines>() {
-                                @Override
-                                public int compare(Degalines degalines, Degalines t1) {
-                                    float dyz1 = Float.parseFloat(degalines.getDujuKaina());
-                                    float dyz2 = Float.parseFloat(t1.getDujuKaina());
-                                    if(dyz1<dyz2)     {
-                                        return -1;
-                                    } else{
-                                        return 1;
-                                    }
-                                }});
-
-                            adaptor = new DegalinesAdaptor(getContext(), R.layout.listview_row_data,productList);
-
-                            listview.setAdapter(adaptor);
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        });
-
-        Volley.newRequestQueue(getContext()).add(stringRequest);
-    }
-
-    private void Sortas(){
+    private void radioButtonFiltras(){
         kurasRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
             switch (i){
                 case R.id.benzinasRadioBtn:
-                    productList.clear();
-                    SortByDidejmoByBenzinas();
-                    mazejimo.setVisibility(View.GONE);
-                    didejimo.setVisibility(View.VISIBLE);
-                    mazejimo.setOnClickListener(view -> {
-                        productList.clear();
-                        mazejimo.setVisibility(View.GONE);
-                        didejimo.setVisibility(View.VISIBLE);
-
-                        SortByDidejmoByBenzinas();
-                    });
-
-                    didejimo.setOnClickListener(view -> {
-                        productList.clear();
-                        mazejimo.setVisibility(View.VISIBLE);
-                        didejimo.setVisibility(View.GONE);
-
-                        SortByMazejimoByBenzinas();
-                    });
+                    degaliniuList.clear();
+                    kuroTipas="benzinas";
+                    loadData();
                     break;
                 case R.id.dyzelinasRadioBtn:
-                    productList.clear();
-                    SortByDidejmoByDiesel();
-                    mazejimo.setVisibility(View.GONE);
-                    didejimo.setVisibility(View.VISIBLE);
-                    mazejimo.setOnClickListener(view -> {
-                        productList.clear();
-                        mazejimo.setVisibility(View.GONE);
-                        didejimo.setVisibility(View.VISIBLE);
-
-                        SortByDidejmoByDiesel();
-                    });
-
-                    didejimo.setOnClickListener(view -> {
-                        productList.clear();
-                        mazejimo.setVisibility(View.VISIBLE);
-                        didejimo.setVisibility(View.GONE);
-
-                        SortByMazejimoByDiesel();
-                    });
+                    degaliniuList.clear();
+                    kuroTipas="dyzelis";
+                    loadData();
                     break;
                 case R.id.dujosRadioBtn:
-                    productList.clear();
-                    SortByDidejmoByDujos();
-                    mazejimo.setVisibility(View.GONE);
-                    didejimo.setVisibility(View.VISIBLE);
-                    mazejimo.setOnClickListener(view -> {
-                        productList.clear();
-                        mazejimo.setVisibility(View.GONE);
-                        didejimo.setVisibility(View.VISIBLE);
-
-                        SortByDidejmoByDujos();
-                    });
-
-                    didejimo.setOnClickListener(view -> {
-                        productList.clear();
-                        mazejimo.setVisibility(View.VISIBLE);
-                        didejimo.setVisibility(View.GONE);
-
-                        SortByMazejimoByDujos();
-                    });
+                    degaliniuList.clear();
+                    kuroTipas="dujos";
+                    loadData();
                     break;
-
-
             }
-
         });
-
     }
-
-
-   /* private void spinneris (){
-
-
-
+ private void spinneris (){
         ArrayList<String> miestai = new ArrayList<>();
-        miestai.add("all");
+        miestai.add("visi");
         miestai.add("Vilnius");
         miestai.add("Kaunas");
-        miestai.add("Klaipeda");
-
+        miestai.add("Klaipėda");
+        miestai.add("Šiauliai");
+        miestai.add("Alytus");
         ArrayAdapter<String> spinerioAdapteris =  new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item,miestai);
         mySpinner.setAdapter(spinerioAdapteris);
-    }*/
 
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                degaliniuList.clear();
+                String text = mySpinner.getSelectedItem().toString();
+                filtruojamasMiestas = text;
+
+                loadData();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
 }

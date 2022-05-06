@@ -94,9 +94,7 @@ package com.example.kurokainos.adapters;
              DujuKaina = dujuKaina;
          }
 
-         public String getMiestas(){
-             return Miestas;
-         }
+         public String getMiestas(){ return Miestas;}
          public void setMiestas(String miestas){
              Miestas = miestas;
          }
@@ -108,9 +106,7 @@ package com.example.kurokainos.adapters;
              Id = id;
          }
 
-         public String getIkelimoData() {
-             return IkelimoData;
-         }
+         public String getIkelimoData() { return IkelimoData; }
 
          public void setIkelimoData(String ikelimoData) {
              IkelimoData = ikelimoData;

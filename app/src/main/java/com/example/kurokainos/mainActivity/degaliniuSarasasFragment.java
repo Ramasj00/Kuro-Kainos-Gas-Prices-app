@@ -3,7 +3,6 @@ package com.example.kurokainos.mainActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +28,6 @@ import org.json.JSONObject;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -60,11 +58,10 @@ public class degaliniuSarasasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        View v = inflater.inflate(R.layout.fragment_degaliniu_sarasas, container, false);
         didejimoTvarka=false;
         kuroTipas="benzinas";
         filtruojamasMiestas="visi";
-        View v = inflater.inflate(R.layout.fragment_degaliniu_sarasas, container, false);
 
         didejimo = v.findViewById(R.id.didejimoButton);
         mazejimo = v.findViewById(R.id.mazejimoButton);
@@ -135,25 +132,25 @@ public class degaliniuSarasasFragment extends Fragment {
         } catch (Exception ignored) {
         }
     }
+
     public void loadData(){
         degaliniuList.clear();
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.DEGALINIU_LIST_API, response -> {
                     try {
                         JSONArray degalines = new JSONArray(response);
                         for(int i =0;i<degalines.length();i++){
-                            JSONObject productObject = degalines.getJSONObject(i);
+                            JSONObject Object = degalines.getJSONObject(i);
 
-                            int id = productObject.getInt("id");
-                            String miestas = productObject.getString("miestas");
-                            String pavadinimas = productObject.getString("pavadinimas");
-                            String adresas = productObject.getString("adresas");
-                            String benzinoKaina = productObject.getString("benzinoKaina");
-                            String dyzelioKaina = productObject.getString("dyzelioKaina");
-                            String dujuKaina = productObject.getString("dujuKaina");
-                            double latitude = productObject.getDouble("latitude");
-                            double longtitude = productObject.getDouble("longtitude");
-                            String atnaujinimoData = productObject.getString("ikelimoData");
+                            int id = Object.getInt("id");
+                            String miestas = Object.getString("miestas");
+                            String pavadinimas = Object.getString("pavadinimas");
+                            String adresas = Object.getString("adresas");
+                            String benzinoKaina = Object.getString("benzinoKaina");
+                            String dyzelioKaina = Object.getString("dyzelioKaina");
+                            String dujuKaina = Object.getString("dujuKaina");
+                            double latitude = Object.getDouble("latitude");
+                            double longtitude = Object.getDouble("longtitude");
+                            String atnaujinimoData = Object.getString("ikelimoData");
 
                             if(filtruojamasMiestas.equals(miestas) || filtruojamasMiestas.equals("visi")) {
                                 Degalines degaline = new Degalines(id, miestas, pavadinimas, adresas, benzinoKaina, dyzelioKaina, dujuKaina, latitude, longtitude, atnaujinimoData);
@@ -164,33 +161,34 @@ public class degaliniuSarasasFragment extends Fragment {
                                 atnaujinta.setText(atnaujinimoData);
                             }
                         }
-                        Collections.sort(degaliniuList, new Comparator<Degalines>() {
+                        degaliniuList.sort(new Comparator<Degalines>() {
                             @Override
                             public int compare(Degalines degalines, Degalines t1) {
                                 float kaina1 = Float.parseFloat(degalines.getKuroKaina(kuroTipas));
                                 float kaina2 = Float.parseFloat(t1.getKuroKaina(kuroTipas));
-                                if(kaina1<kaina2){
-                                    if(didejimoTvarka){
+                                if (kaina1 < kaina2) {
+                                    if (didejimoTvarka) {
                                         return -1;
                                     } else {
                                         return 1;
                                     }
-                                }else{
-                                    if(didejimoTvarka){
+                                } else {
+                                    if (didejimoTvarka) {
                                         return 1;
                                     } else {
                                         return -1;
                                     }
                                 }
-                            }});
+                            }
+                        });
 
-                        adaptor = new DegalinesAdaptor(getContext(), R.layout.listview_row_data,degaliniuList);
+                        adaptor = new DegalinesAdaptor(requireContext(), R.layout.listview_row_data,degaliniuList);
                         listview.setAdapter(adaptor);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }, error -> System.out.println(error));
-        Volley.newRequestQueue(getContext()).add(stringRequest);
+        Volley.newRequestQueue(requireContext()).add(stringRequest);
     }
     private void radioButtonFiltras(){
         kurasRadioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
@@ -228,16 +226,26 @@ public class degaliniuSarasasFragment extends Fragment {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                degaliniuList.clear();
-                String text = mySpinner.getSelectedItem().toString();
-                filtruojamasMiestas = text;
+
+                filtruojamasMiestas = mySpinner.getSelectedItem().toString();
 
                 loadData();
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+
             }
         });
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        degaliniuList.clear();
+        listview.deferNotifyDataSetChanged();
+        loadData();
+
+
     }
 }

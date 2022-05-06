@@ -32,31 +32,15 @@ public class DegalinesCommentListAdapter extends ArrayAdapter<DegalinesCommentLi
 
         convertView = layoutInflater.inflate(mResource,parent,false);
 
-
-
-
-
         TextView benzinas = convertView.findViewById(R.id.benzinoKaina);
-
         TextView dyzelis = convertView.findViewById(R.id.dyzelinoKaina);
-
         TextView dujos = convertView.findViewById(R.id.dujuKaina);
-
         TextView data = convertView.findViewById(R.id.commentData);
 
-
-
-
         benzinas.setText( getItem(position).getBenzinoKaina());
-
         dyzelis.setText( getItem(position).getDyzelioKaina());
-
         dujos.setText( getItem(position).getDujuKaina());
-
         data.setText( getItem(position).getCommentDate());
-
-
-
 
         return convertView;
     }

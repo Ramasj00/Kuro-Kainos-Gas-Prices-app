@@ -11,31 +11,23 @@ import android.os.Bundle;
 import com.example.kurokainos.R;
 import com.google.android.material.navigation.NavigationView;
 
-
-
-
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            // PRIDEDAM SIDE NAV
             drawerLayout = findViewById(R.id.drawerLayout);
+            NavigationView navigationView = findViewById(R.id.navigationView);
 
             findViewById(R.id.imageMenu).setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
 
-            //side nav mygtuku prrogramavimas
-            NavigationView navigationView = findViewById(R.id.navigationView);
-
+            //side nav mygtuku programavimas
             NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
             NavigationUI.setupWithNavController(navigationView, navController);
 
         }
-
-
 }

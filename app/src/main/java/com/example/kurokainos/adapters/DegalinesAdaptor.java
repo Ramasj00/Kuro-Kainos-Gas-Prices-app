@@ -31,27 +31,16 @@ private final int mResource;
         convertView = layoutInflater.inflate(mResource,parent,false);
 
         TextView degalinesPavadinimas = convertView.findViewById(R.id.degalinesPavadinimas);
-
         TextView degalinesAdresas = convertView.findViewById(R.id.degalinesAdresas);
-
         TextView benzinas = convertView.findViewById(R.id.benzinas);
-
         TextView dyzelis = convertView.findViewById(R.id.dyzelis);
-
         TextView dujos = convertView.findViewById(R.id.dujos);
 
         degalinesPavadinimas.setText(getItem(position).getPavadinimas());
-
         degalinesAdresas.setText(getItem(position).getAdresas());
-
         benzinas.setText( getItem(position).getBenzinoKaina());
-
         dyzelis.setText( getItem(position).getDyzelioKaina());
-
         dujos.setText( getItem(position).getDujuKaina());
-
-
-
 
         return convertView;
     }

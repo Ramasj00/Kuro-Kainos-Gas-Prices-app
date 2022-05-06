@@ -1,13 +1,19 @@
 package com.example.kurokainos.mainActivity;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +30,7 @@ import com.example.kurokainos.adapters.DegalinesLocation;
 import com.example.kurokainos.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,17 +51,22 @@ public class sideNavFragment extends Fragment {
     private final ArrayList<DegalinesLocation> productList = new ArrayList<>();
     private GoogleMap mMap;
     private FusedLocationProviderClient client;
+    boolean isPermission;
+    private LocationManager locationManager;
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
+        //@SuppressLint("MissingPermission")
         @Override
         public void onMapReady(GoogleMap googleMap) {
 
-            //sukuria naujus markerius
+
+
+
             loadLocation();
 
             mMap = googleMap;
 
-            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -65,8 +77,21 @@ public class sideNavFragment extends Fragment {
                 return;
             }
 
+            mMap.setMyLocationEnabled(true);
+            Criteria criteria = new Criteria();
+            locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+            String provider = locationManager.getBestProvider(criteria, true);
+            Location location = locationManager.getLastKnownLocation(provider);
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            LatLng myPosition = new LatLng(latitude, longitude);
+            //googleMap.addMarker(new MarkerOptions().position(myPosition).title("Marker"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 15f));
+
         }
+
     };
+
 
     @Nullable
     @Override
@@ -86,57 +111,56 @@ public class sideNavFragment extends Fragment {
         }
     }
 
-    private void loadLocation() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.LOCATION_API,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-
-                            JSONArray products = new JSONArray(response);
-
-                            for (int i = 0; i < products.length(); i++) {
-                                JSONObject productObject = products.getJSONObject(i);
 
 
-                                String pavadinimas = productObject.getString("pavadinimas");
-                                String adresas = productObject.getString("adresas");
-                                String latitude = productObject.getString("latitude");
-                                String longtitude = productObject.getString("longtitude");
+        private void loadLocation() {
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.LOCATION_API,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
 
-                                double lat = Double.parseDouble(latitude);
-                                double longt = Double.parseDouble(longtitude);
+                                JSONArray locationList = new JSONArray(response);
 
-                                DegalinesLocation location = new DegalinesLocation(pavadinimas, adresas, lat, longt);
+                                for (int i = 0; i < locationList.length(); i++) {
+                                    JSONObject object = locationList.getJSONObject(i);
 
-                                productList.add(location);
+                                    String pavadinimas = object.getString("pavadinimas");
+                                    String adresas = object.getString("adresas");
+                                    String latitude = object.getString("latitude");
+                                    String longtitude = object.getString("longtitude");
 
+                                    double lat = Double.parseDouble(latitude);
+                                    double longt = Double.parseDouble(longtitude);
 
-                                LatLng vilnius = new LatLng(54.720893849999996, 25.284759795951338);
+                                    DegalinesLocation location = new DegalinesLocation(pavadinimas, adresas, lat, longt);
+
+                                    productList.add(location);
+
+                                /*LatLng vilnius = new LatLng(54.720893849999996, 25.284759795951338);
                                 mMap.addMarker(new MarkerOptions().position(vilnius).title("Kalvarijų g. 204G Vilnius"));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius, 15f));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius, 15f));*/
 
-                                for (int j = 0; j < productList.size(); j++) {
-                                    LatLng locationn = new LatLng(productList.get(j).getLatitude(), productList.get(j).getLongtitude());
-                                    mMap.addMarker(new MarkerOptions().position(locationn).title(productList.get(j).getPavadinimas()));
+                                    for (int j = 0; j < productList.size(); j++) {
+                                        LatLng locationn = new LatLng(productList.get(j).getLatitude(), productList.get(j).getLongtitude());
+                                        mMap.addMarker(new MarkerOptions().position(locationn).title(productList.get(j).getPavadinimas()));
+                                    }
+
                                 }
 
-
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        });
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println(error);
+                }
+            });
 
-        Volley.newRequestQueue(getContext()).add(stringRequest);
+            Volley.newRequestQueue(requireContext()).add(stringRequest);
+        }
+
+
     }
-
-
-}

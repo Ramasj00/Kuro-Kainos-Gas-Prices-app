@@ -235,7 +235,6 @@ public class degaliniuSarasasFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
-
             }
         });
     }
@@ -245,7 +244,5 @@ public class degaliniuSarasasFragment extends Fragment {
         degaliniuList.clear();
         listview.deferNotifyDataSetChanged();
         loadData();
-
-
     }
 }

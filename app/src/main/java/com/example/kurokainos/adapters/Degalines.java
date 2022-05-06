@@ -79,7 +79,6 @@ package com.example.kurokainos.adapters;
              return kaina;
          }
 
-
          public String getBenzinoKaina(){
              return BenzinoKaina;
          }

@@ -1,14 +1,10 @@
 package com.example.kurokainos.mainActivity;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -18,49 +14,34 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kurokainos.adapters.Constant;
-import com.example.kurokainos.adapters.Degalines;
 import com.example.kurokainos.adapters.DegalinesLocation;
 import com.example.kurokainos.R;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class sideNavFragment extends Fragment {
 
     private final ArrayList<DegalinesLocation> productList = new ArrayList<>();
     private GoogleMap mMap;
-    private FusedLocationProviderClient client;
-    boolean isPermission;
     private LocationManager locationManager;
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
-        //@SuppressLint("MissingPermission")
         @Override
         public void onMapReady(GoogleMap googleMap) {
-
-
-
 
             loadLocation();
 
@@ -85,14 +66,9 @@ public class sideNavFragment extends Fragment {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
             LatLng myPosition = new LatLng(latitude, longitude);
-            //googleMap.addMarker(new MarkerOptions().position(myPosition).title("Marker"));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 15f));
-
         }
-
     };
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -100,7 +76,6 @@ public class sideNavFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_side_nav, container, false);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -110,16 +85,12 @@ public class sideNavFragment extends Fragment {
             mapFragment.getMapAsync(callback);
         }
     }
-
-
-
         private void loadLocation() {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, Constant.LOCATION_API,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
-
                                 JSONArray locationList = new JSONArray(response);
 
                                 for (int i = 0; i < locationList.length(); i++) {
@@ -137,17 +108,11 @@ public class sideNavFragment extends Fragment {
 
                                     productList.add(location);
 
-                                /*LatLng vilnius = new LatLng(54.720893849999996, 25.284759795951338);
-                                mMap.addMarker(new MarkerOptions().position(vilnius).title("Kalvarijų g. 204G Vilnius"));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius, 15f));*/
-
                                     for (int j = 0; j < productList.size(); j++) {
                                         LatLng locationn = new LatLng(productList.get(j).getLatitude(), productList.get(j).getLongtitude());
                                         mMap.addMarker(new MarkerOptions().position(locationn).title(productList.get(j).getPavadinimas()));
                                     }
-
                                 }
-
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -161,6 +126,4 @@ public class sideNavFragment extends Fragment {
 
             Volley.newRequestQueue(requireContext()).add(stringRequest);
         }
-
-
     }

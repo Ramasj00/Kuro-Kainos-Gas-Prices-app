@@ -3,12 +3,10 @@ package com.example.kurokainos.singleDegaline;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.kurokainos.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,7 +20,6 @@ private final double longt;
 private final double lat;
 private final String degPavadinimas;
 
-
    public MapsFragment(double longt, double lat, String degPavadinimas){
        this.longt=longt;
        this.lat=lat;
@@ -33,14 +30,10 @@ private final String degPavadinimas;
         @Override
         public void onMapReady(GoogleMap googleMap) {
 
-
-    //UZDEDAMAS MARKERIS ANT PARASYTOS POZICIJOS
-
             if(!String.valueOf(lat).equals(null) && !String.valueOf(longt).equals(null)) {
                 LatLng vilnius = new LatLng(lat, longt);
                 googleMap.addMarker(new MarkerOptions().position(vilnius).title(degPavadinimas));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(vilnius, 16f));
-
             }
         }
     };

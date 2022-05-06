@@ -31,13 +31,7 @@ public class DegalinesInfoActivity extends AppCompatActivity {
         dyzelis = findViewById(R.id.dyzelis);
         dujos = findViewById(R.id.dujos);
 
-
         Intent intent = getIntent();
-
-
-
-
-
 
         double defaultValue=0.00;
         String degPavadinimas = intent.getStringExtra("degalinesPavadinimas");
@@ -46,7 +40,6 @@ public class DegalinesInfoActivity extends AppCompatActivity {
         degalinesPavadinimas.setText(degPavadinimas);
         degalinesAdresas.setText(degAdresas);
 
-
         benzinas.setText(intent.getStringExtra("benzinas"));
         dyzelis.setText(intent.getStringExtra("dyzelis"));
         dujos.setText(intent.getStringExtra("dujos"));
@@ -54,8 +47,6 @@ public class DegalinesInfoActivity extends AppCompatActivity {
         double longt =intent.getDoubleExtra("longtitude",defaultValue);
         Fragment map = new MapsFragment(longt,lat,degPavadinimas);
         getSupportFragmentManager().beginTransaction().replace(R.id.mapView, map).commit();
-
-
 
         commentListButton = findViewById(R.id.commentListButton);
         commentListButton.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +57,6 @@ public class DegalinesInfoActivity extends AppCompatActivity {
 
             private void openCommentListActivity() {
                 Intent intent = new Intent(getApplicationContext(), CommentListActivity.class);
-
 
                 intent.putExtra("degalinesPavadinimas",degPavadinimas);
                 intent.putExtra("degalinesAdresas",degAdresas);

@@ -6,8 +6,6 @@ public class DegalinesLocation {
     double latitude;
     double longtitude;
 
-
-
     public DegalinesLocation( String pavadinimas,String adresas, double latitude, double longtitude) {
         this.pavadinimas = pavadinimas;
         this.adresas = adresas;
@@ -46,6 +44,4 @@ public class DegalinesLocation {
     public void setLongtitude(double longtitude) {
         this.longtitude = longtitude;
     }
-
-
 }

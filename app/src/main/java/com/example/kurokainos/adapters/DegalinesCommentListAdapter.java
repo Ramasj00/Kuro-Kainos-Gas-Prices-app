@@ -24,7 +24,6 @@ public class DegalinesCommentListAdapter extends ArrayAdapter<DegalinesCommentLi
         this.mContext = context;
         this.mResource = resource;
     }
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
